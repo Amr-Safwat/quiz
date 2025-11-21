@@ -1,0 +1,21 @@
+.container {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container .title{
+margin-bottom: 40px;
+}
+.container .btn{
+  text-decoration: none;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 40px;
+  background-color: indianred;
+  color: white;
+  cursor: pointer;
+}
