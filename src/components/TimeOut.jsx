@@ -7,6 +7,7 @@ const TimeOut = ({message}) => {
     <div className="layout">
       <div className="popup">
         <h1>{message}</h1>
+        <p>حض سعيد فى المره القادمه عليك القراءة .</p>
         <Link to={'/quiz'}>
           <button>رجوع الى الرئيسية</button>
         </Link>

@@ -13,6 +13,12 @@
     transform: scale(0.7);
     animation: scaling .1s ease-in-out alternate forwards;
 }
+.popup h1 {
+    margin: 20px 0 5px 0;
+}
+.popup p {
+    margin-bottom: 8px;
+}
 button {
   padding: 12px 25px;
   border-radius: 10px;
