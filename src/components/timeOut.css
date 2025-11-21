@@ -3,7 +3,7 @@
   background-color: #aaa;
   padding: 10px;
   border-radius: 10px;
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,10 +14,10 @@
     animation: scaling .1s ease-in-out alternate forwards;
 }
 .popup h1 {
-    margin: 20px 0 5px 0;
+    margin: 20px 0 0 0;
 }
 .popup p {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 button {
   padding: 12px 25px;

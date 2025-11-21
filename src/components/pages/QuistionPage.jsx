@@ -32,7 +32,10 @@ const QuistionPage = () => {
     ) {
       e.target.style.backgroundColor = 'green';
       setTimeout(() => {
-        setNumOfQuistions(numOfQuistions + 1);
+        randomNumber = Math.floor(
+          Math.random() * DataQuistions.questions.length
+        );
+        setNumOfQuistions(randomNumber);
         e.target.style.backgroundColor = '';
         startTime();
         setCounter(15);
@@ -42,6 +45,10 @@ const QuistionPage = () => {
       setTimeout(() => {
         setMessageCorrect(false);
         setMessage('اجابة خاطئة');
+        randomNumber = Math.floor(
+          Math.random() * DataQuistions.questions.length
+        );
+        setNumOfQuistions(randomNumber);
       }, 1000);
     }
   }
@@ -51,9 +58,9 @@ const QuistionPage = () => {
 
       <Link className="icon-close" to={'/quiz'}><LogoutIcon /></Link>
       <div className="timer">{counter}</div>
-      <h2 className="quistion">
+      <h1 className="quistion">
         {DataQuistions.questions[numOfQuistions].question}
-      </h2>
+      </h1>
       <div className="answers">
         <div className="answer" onClick={(e) => handleClickAnswer(e)}>
           {DataQuistions.questions[numOfQuistions].options[0]}
