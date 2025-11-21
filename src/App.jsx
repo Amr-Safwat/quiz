@@ -10,8 +10,8 @@ function App() {
     <>
       {/* Routes */}
       <Routes>
-        <Route path="/" element={<FirstPage />} />
-        <Route path="/quistions" element={<QuistionPage />} />
+        <Route path="/quiz" element={<FirstPage />} />
+        <Route path="/quiz/quistions" element={<QuistionPage />} />
       </Routes>
     </>
   );
