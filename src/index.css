@@ -1,4 +1,6 @@
 #root{
   height: 100vh;
   direction: rtl;
+  background-image: radial-gradient(circle, #9a0aaa 0%, #034452 70%);
+  color: white;
 }

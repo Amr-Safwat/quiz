@@ -1,16 +1,18 @@
-import React from 'react'
-import './timeOut.css'
-import { Link } from 'react-router';
+import React from 'react';
+import './timeOut.css';
+import {Link} from 'react-router';
 
 const TimeOut = ({message}) => {
   return (
-    <div className="popup">
-      <h1>{message}</h1>
-      <Link to={'/quiz'}>
-        <button>رجوع الى الرئيسية</button>
-      </Link>
+    <div className="layout">
+      <div className="popup">
+        <h1>{message}</h1>
+        <Link to={'/quiz'}>
+          <button>رجوع الى الرئيسية</button>
+        </Link>
+      </div>
     </div>
   );
-}
+};
 
-export default TimeOut
+export default TimeOut;

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './quistionPage.css';
 import TimeOut from '../TimeOut';
 import {DataQuistions} from '../../../public/DataQuistions';
+import LogoutIcon from '@mui/icons-material/Logout';
+import {Link} from 'react-router'
 
 let randomNumber = Math.floor(Math.random() * DataQuistions.questions.length);
 
@@ -10,7 +12,6 @@ const QuistionPage = () => {
   const [numOfQuistions, setNumOfQuistions] = useState(randomNumber);
   const [messageCorrect, setMessageCorrect] = useState(randomNumber);
   const [message, setMessage] = useState('انتهى الوقت');
-
 
   function startTime(value) {
     let intervalId = setTimeout(() => {
@@ -22,32 +23,37 @@ const QuistionPage = () => {
       }
     }, 1000);
   }
-  startTime();
-  
+  // startTime();
 
-function handleClickAnswer(e) {
-  if (e.target.innerText == DataQuistions.questions[numOfQuistions].correct_answer) {
-    e.target.style.backgroundColor = 'green';
-    setTimeout(() => {
-      setNumOfQuistions(numOfQuistions + 1);
-      e.target.style.backgroundColor = '';
+  function handleClickAnswer(e) {
+    if (
+      e.target.innerText ==
+      DataQuistions.questions[numOfQuistions].correct_answer
+    ) {
+      e.target.style.backgroundColor = 'green';
+      setTimeout(() => {
+        setNumOfQuistions(numOfQuistions + 1);
+        e.target.style.backgroundColor = '';
         startTime();
-      setCounter(15)
-    }, 2000);
-  } else {
-    e.target.style.backgroundColor = 'red';
-    setTimeout(() => {
-      setMessageCorrect(false);
-      setMessage('اجابة خاطئة')
-    }, 1000);
+        setCounter(15);
+      }, 2000);
+    } else {
+      e.target.style.backgroundColor = 'red';
+      setTimeout(() => {
+        setMessageCorrect(false);
+        setMessage('اجابة خاطئة');
+      }, 1000);
+    }
   }
-}
 
   return (
     <div className="container">
-      <div className="icon-close">x</div>
+
+      <Link className="icon-close" to={'/quiz'}><LogoutIcon /></Link>
       <div className="timer">{counter}</div>
-      <h2 className="quistion">{DataQuistions.questions[numOfQuistions].question}</h2>
+      <h2 className="quistion">
+        {DataQuistions.questions[numOfQuistions].question}
+      </h2>
       <div className="answers">
         <div className="answer" onClick={(e) => handleClickAnswer(e)}>
           {DataQuistions.questions[numOfQuistions].options[0]}
@@ -66,7 +72,9 @@ function handleClickAnswer(e) {
         </div>
       </div>
 
-      {counter === 0 || messageCorrect == false? <TimeOut message={message}/> : null}
+      {counter === 0 || messageCorrect == false ? (
+        <TimeOut message={message} />
+      ) : null}
     </div>
   );
 };
