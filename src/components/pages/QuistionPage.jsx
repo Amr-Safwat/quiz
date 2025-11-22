@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import './quistionPage.css';
 import TimeOut from '../TimeOut';
 import {DataQuistions} from '../../../public/DataQuistions';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {Link} from 'react-router'
+import {Link} from 'react-router';
 
 let randomNumber = Math.floor(Math.random() * DataQuistions.questions.length);
 
@@ -12,18 +12,23 @@ const QuistionPage = () => {
   const [numOfQuistions, setNumOfQuistions] = useState(randomNumber);
   const [messageCorrect, setMessageCorrect] = useState(randomNumber);
   const [message, setMessage] = useState('انتهى الوقت');
+  const answersList = useRef();
 
-  function startTime(value) {
+  function startTime() {
     let intervalId = setTimeout(() => {
-      console.log('done', counter);
-      if (counter != 0) {
-        setCounter(counter - 1);
-      } else {
-        clearTimeout(intervalId);
-      }
-    }, 1000);
+        console.log('done', counter);
+        if (counter != 0) {
+          setCounter(counter - 1);
+        } else {
+          clearTimeout(intervalId);
+        }
+      }, 1000);
   }
-  // startTime();
+
+  useEffect(()=>{
+    startTime();
+  },[counter])
+  
 
   function handleClickAnswer(e) {
     if (
@@ -37,11 +42,18 @@ const QuistionPage = () => {
         );
         setNumOfQuistions(randomNumber);
         e.target.style.backgroundColor = '';
-        startTime();
-        setCounter(15);
       }, 2000);
     } else {
       e.target.style.backgroundColor = 'red';
+
+      for (let i = 0; i < answersList.current.children.length; i++) {
+        if (
+          answersList.current.children[i].innerText ===
+          DataQuistions.questions[numOfQuistions].correct_answer
+        ) {
+          answersList.current.children[i].style.backgroundColor = 'green';
+        }
+      }
       setTimeout(() => {
         setMessageCorrect(false);
         setMessage('اجابة خاطئة');
@@ -49,19 +61,20 @@ const QuistionPage = () => {
           Math.random() * DataQuistions.questions.length
         );
         setNumOfQuistions(randomNumber);
-      }, 1000);
+      }, 2000);
     }
   }
 
   return (
     <div className="container">
-
-      <Link className="icon-close" to={'/quiz'}><LogoutIcon /></Link>
+      <Link className="icon-close" to={'/quiz'}>
+        <LogoutIcon />
+      </Link>
       <div className="timer">{counter}</div>
       <h1 className="quistion">
         {DataQuistions.questions[numOfQuistions].question}
       </h1>
-      <div className="answers">
+      <div className="answers" ref={answersList}>
         <div className="answer" onClick={(e) => handleClickAnswer(e)}>
           {DataQuistions.questions[numOfQuistions].options[0]}
         </div>

@@ -7,7 +7,7 @@ import logo from '../../assets/pngtree-golden-mosque-islamic-logo-design-png-ima
 const FirstPage = () => {
   return (
     <div className="container">
-      <img src={logo} alt="" srcset="" width={'200px'}/>
+      <img src={logo} alt="" width={'200px'}/>
       <h2 className="title">اختبر معلومات الدينية</h2>
       <Link className="btn" to={'/quiz/quistions'}>
         العب الان
