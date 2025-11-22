@@ -4,6 +4,7 @@ import TimeOut from '../TimeOut';
 import {DataQuistions} from '../../../public/DataQuistions';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {Link} from 'react-router';
+import song from '../../assets/GBxz8k0Vo7s.mp3';
 
 let randomNumber = Math.floor(Math.random() * DataQuistions.questions.length);
 
@@ -25,7 +26,23 @@ const QuistionPage = () => {
 
   startTime()
 
-  useEffect(() => {}, [counter]);
+// sound timer
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio
+      .play()
+      .then(() => {
+        console.log('Autoplay success (muted)');
+      })
+      .catch((err) => {
+        console.warn('Autoplay blocked:', err);
+      });
+  }, [randomNumber]);
+// sound timer
 
   function handleClickAnswer(e) {
     setStop(true);
@@ -71,7 +88,7 @@ const QuistionPage = () => {
       <Link className="icon-close" to={'/quiz'}>
         <LogoutIcon />
       </Link>
-      <div className="timer">{counter < 10? '0' + counter : counter}</div>
+      <div className="timer">{counter < 10 ? '0' + counter : counter}</div>
       <h1 className="quistion">
         {DataQuistions.questions[numOfQuistions].question}
       </h1>
@@ -93,6 +110,9 @@ const QuistionPage = () => {
         </div>
       </div>
 
+      <audio ref={audioRef} controls loop style={{display: 'none'}}>
+        <source src={song} type="audio/ogg" />
+      </audio>
       {counter === 0 || messageCorrect == false ? (
         <TimeOut message={message} />
       ) : null}
