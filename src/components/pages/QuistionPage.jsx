@@ -9,7 +9,7 @@ import song from '../../assets/GBxz8k0Vo7s.mp3';
 let randomNumber = Math.floor(Math.random() * DataQuistions.questions.length);
 
 const QuistionPage = () => {
-  const [counter, setCounter] = useState(15);
+  const [counter, setCounter] = useState(20);
   const [numOfQuistions, setNumOfQuistions] = useState(randomNumber);
   const [messageCorrect, setMessageCorrect] = useState(randomNumber);
   const [message, setMessage] = useState('انتهى الوقت');
@@ -57,7 +57,7 @@ const QuistionPage = () => {
         );
         setNumOfQuistions(randomNumber);
         e.target.style.backgroundColor = '';
-        setCounter(15)
+        setCounter(20)
         setStop(false);
       }, 2000);
     } else {
