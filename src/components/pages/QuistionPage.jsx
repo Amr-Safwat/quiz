@@ -13,24 +13,22 @@ const QuistionPage = () => {
   const [messageCorrect, setMessageCorrect] = useState(randomNumber);
   const [message, setMessage] = useState('انتهى الوقت');
   const answersList = useRef();
+  let [stop, setStop] = useState(false);
 
   function startTime() {
-    let intervalId = setTimeout(() => {
-        console.log('done', counter);
-        if (counter != 0) {
-          setCounter(counter - 1);
-        } else {
-          clearTimeout(intervalId);
-        }
-      }, 1000);
+    let timerId = setTimeout(() => {
+      if (counter != 0) {
+        stop ? null : setCounter(counter - 1);
+      }
+    }, 1000);
   }
 
-  useEffect(()=>{
-    startTime();
-  },[counter])
-  
+  startTime()
+
+  useEffect(() => {}, [counter]);
 
   function handleClickAnswer(e) {
+    setStop(true);
     if (
       e.target.innerText ==
       DataQuistions.questions[numOfQuistions].correct_answer
@@ -42,10 +40,13 @@ const QuistionPage = () => {
         );
         setNumOfQuistions(randomNumber);
         e.target.style.backgroundColor = '';
+        setCounter(15)
+        setStop(false);
       }, 2000);
     } else {
+      console.log(stop);
+      
       e.target.style.backgroundColor = 'red';
-
       for (let i = 0; i < answersList.current.children.length; i++) {
         if (
           answersList.current.children[i].innerText ===
@@ -70,7 +71,7 @@ const QuistionPage = () => {
       <Link className="icon-close" to={'/quiz'}>
         <LogoutIcon />
       </Link>
-      <div className="timer">{counter}</div>
+      <div className="timer">{counter < 10? '0' + counter : counter}</div>
       <h1 className="quistion">
         {DataQuistions.questions[numOfQuistions].question}
       </h1>
